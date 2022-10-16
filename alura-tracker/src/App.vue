@@ -1,9 +1,9 @@
 <template> 
-    <main class="columns is-gapless is-multiline">
+    <main class="columns is-gapless is-multiline" :class="{'dark-mode' : darkMode}">
         <div class="column is-one-quarter">
-            <SideBar />
+            <SideBar @onSwitchTheme="switchTheme" />
         </div>
-        <div class="column is-three-quarter">
+        <div class="column is-three-quarter content">
             <FormTasks @onSubmit="saveTask" />
             <div class="lista">
                 <Tasks v-for="(task, index) in tasks" :key="index" :task="task" />
@@ -33,7 +33,8 @@ import TaskBox from './components/TaskBox.vue';
 },
     data(){
         return {
-            tasks: [] as ITask[]
+            tasks: [] as ITask[],
+            darkMode: false
         }
     },
     computed:{
@@ -44,6 +45,8 @@ import TaskBox from './components/TaskBox.vue';
     methods: {
         saveTask(task:ITask){
             this.tasks.push(task)
+        }, switchTheme(darkMode: boolean) {
+            this.darkMode = darkMode
         }
     }
 });
@@ -51,5 +54,16 @@ import TaskBox from './components/TaskBox.vue';
 <style>
     .lista{
         padding: 1.25rem;
+    }
+    main{
+        --default-background:#FFF;
+        --default-text:#000;
+    }
+    main.dark-mode{
+        --default-background:#2b2d42;
+        --default-text:#ddd;
+    }
+    .content{
+        background-color: var(--default-background);
     }
 </style>

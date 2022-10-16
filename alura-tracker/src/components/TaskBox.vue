@@ -1,5 +1,5 @@
 <template>
-    <div class="box has-text-weight-bold">
+    <div class="box has-text-weight-bold" :style="style">
         <slot></slot>
     </div>
 </template>
@@ -7,11 +7,13 @@
 <script lang="ts">
     import { defineComponent } from 'vue';
     export default defineComponent({
-        name:'TaskBox'
+        name:'TaskBox',
+        data() {
+            return {
+                style:{
+                    'background': '#FAF0CA'
+                }
+            }
+        }
     });
 </script>
-<style scoped>
-    .box{
-        background: #FAF0CA;
-    }
-</style>
